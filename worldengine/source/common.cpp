@@ -31,7 +31,7 @@ std::string GenerateTemporaryFilename(const std::string& prefix,
    time_t t = std::time(nullptr);
    tm     time;
 
-#if defined(_MSC_VER)
+#if defined(_WIN32)
    localtime_s(&time, &t);
 #else
    localtime_r(&t, &time);

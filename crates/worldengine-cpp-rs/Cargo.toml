@@ -1,0 +1,11 @@
+[package]
+name = "worldengine-cpp-rs"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+repository.workspace = true
+description = "Safe Rust data-only wrapper for WorldEngine C++"
+
+[dependencies]
+worldengine-cpp-sys = { path = "../worldengine-cpp-sys", version = "0.1.0" }
+
