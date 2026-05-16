@@ -18,6 +18,7 @@
 #pragma warning(pop)
 #endif
 
+#ifndef WORLDENGINE_DATA_ONLY
 #include <hdf5/H5Cpp.h>
 
 #if defined(_MSC_VER)
@@ -40,6 +41,7 @@
 #elif defined(__GNUC__)
 #pragma GCC diagnostic pop
 #endif
+#endif // WORLDENGINE_DATA_ONLY
 
 namespace std
 {
@@ -92,6 +94,7 @@ std::ostream& operator<<(std::ostream& os, const boost::multi_array<T, 2>& a)
 namespace WorldEngine
 {
 
+#ifndef WORLDENGINE_DATA_ONLY
 template<class T, class U>
 static U DefaultTransform(const T& value)
 {
@@ -112,6 +115,7 @@ static void FromProtobufMatrix(
 
 static int32_t WorldengineTag();
 static int32_t VersionHashcode();
+#endif // WORLDENGINE_DATA_ONLY
 
 typedef boost::bimap<boost::bimaps::unordered_set_of<HumidityLevel>,
                      boost::bimaps::unordered_set_of<int>>
@@ -792,6 +796,8 @@ void World::SetThreshold(WaterThreshold type, float value)
 {
    waterThresholds_[type] = value;
 }
+
+#ifndef WORLDENGINE_DATA_ONLY
 
 bool World::ProtobufSerialize(std::string& output) const
 {
@@ -1575,6 +1581,8 @@ bool World::SaveHdf5(const std::string& filename) const
    return success;
 }
 
+#endif // WORLDENGINE_DATA_ONLY
+
 template<typename T, typename U>
 void World::SetArrayData(const U* source, boost::multi_array<T, 2>& dest)
 {
@@ -1590,6 +1598,8 @@ void World::SetArrayData(const U* source, boost::multi_array<T, 2>& dest)
       }
    }
 }
+
+#ifndef WORLDENGINE_DATA_ONLY
 
 template<class T, class U, class V>
 static void ToProtobufMatrix(const boost::multi_array<T, 2>&   source,
@@ -1654,5 +1664,7 @@ static int32_t VersionHashcode()
 
    return hashcode;
 }
+
+#endif // WORLDENGINE_DATA_ONLY
 
 } // namespace WorldEngine
